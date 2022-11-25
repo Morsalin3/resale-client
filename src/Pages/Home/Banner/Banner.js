@@ -9,7 +9,7 @@ const Banner = () => {
             <div className='mx-10'>
                 <h1 className='text-5xl font-extrabold tracking-normal leading-tight'>
                 SELL YOUR <br/>
-                SMARTPHONE <br/>
+                <span className='text-info'>SMARTPHONE</span> <br/>
                 FOR QUICK CASH
                 </h1>
             </div>

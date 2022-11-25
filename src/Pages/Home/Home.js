@@ -1,11 +1,12 @@
 import React from 'react';
 import Banner from './Banner/Banner';
+import WhyPeopleTrust from './WhyPeopleTrust/WhyPeopleTrust';
 
 const Home = () => {
     return (
         <div className='mx-5'>
-            <h2>this is home</h2>
             <Banner></Banner>
+            <WhyPeopleTrust></WhyPeopleTrust>
         </div>
     );
 };
