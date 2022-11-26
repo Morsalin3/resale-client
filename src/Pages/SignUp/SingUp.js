@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { Authcontext } from '../../contexts/AuthProvider';
 
 const SingUp = () => {
-    const { register, formState: { errors },reset, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    const {createUser} = useContext(Authcontext)
 
     const handleSignUp = data => {
-        reset();
-        console.log(data)
+        createUser(data.email, data.password)
+        .then(result =>{
+            const user = result.user
+            console.log(user)
+        })
+        .catch(error =>{
+            console.log(error)
+        });
+        
+        
     }
 
     return (
@@ -46,7 +56,7 @@ const SingUp = () => {
                     <div className='form-control w-full'>
                         <label className='label'><span className='label-text'>Role</span></label>
                         <select {...register('role')}className="select input-bordered w-full max-w-xs">
-                            <option defaultValue='normal user'>Normal User</option>
+                            <option defaultValue='normal user'>User</option>
                             <option value="seller">Seller</option>
                             
                         </select>

@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { Authcontext } from '../../contexts/AuthProvider';
 
 
 const Login = () => {
     const {register, formState:{errors}, handleSubmit} = useForm();
+    const {signIn} = useContext(Authcontext);
+    const [loginError, setLoginError] = useState('')
 
     const handleLogin = data =>{
         console.log(data);
+        signIn(data.email, data.password)
+        .then(result=>{
+            const user = result.user;
+            // console.log(user)
+        })
+        .catch(error=>{
+            console.log(error.message);
+            setLoginError(error.message)
+        })
     }
 
     return (
@@ -35,9 +47,9 @@ const Login = () => {
                    </div> 
                    
                     <input className='btn btn-info w-full mt-5' value='Login' type="submit" />
-                    {/* <div>
+                    <div>
                         {loginError && <p className='text-error'>{loginError}</p>}
-                    </div> */}
+                    </div>
                 </form>
                 <p>New to Swap <Link className='text-info' to ='/signup'>Create an Account</Link></p>
                 <div className="divider">OR</div>
