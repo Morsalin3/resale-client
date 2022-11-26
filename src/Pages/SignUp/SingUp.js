@@ -1,20 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { Authcontext } from '../../contexts/AuthProvider';
 
 const SingUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const {createUser} = useContext(Authcontext)
+    const {createUser, updateUser} = useContext(Authcontext)
+    const [signUpError, setSignUpError] =useState('')
 
     const handleSignUp = data => {
+        setSignUpError('')
         createUser(data.email, data.password)
         .then(result =>{
             const user = result.user
             console.log(user)
+            toast.success('User create successfully')
+            const userInfo = {
+                displayName: data.name
+            }
+            updateUser(userInfo)
+            .then(()=>{})
+            .catch(error=>console.log(error))
         })
         .catch(error =>{
             console.log(error)
+            setSignUpError(error.message)
         });
         
         
@@ -28,7 +39,7 @@ const SingUp = () => {
                     <div className='form-control w-full max-w-xs'>
                         <label className='label'><span className='label-text'>Name</span></label>
                         <input type='text'
-                            {...register("Name", {
+                            {...register("name", {
                                 required: "Name address is required"
                             })}
 
@@ -63,9 +74,9 @@ const SingUp = () => {
                     </div>
 
                     <input className='btn btn-info w-full mt-5' value='Login' type="submit" />
-                    {/* <div>
-                        {loginError && <p className='text-error'>{loginError}</p>}
-                    </div> */}
+                    <div>
+                        {signUpError && <p className='text-error'>{signUpError}</p>}
+                    </div>
                 </form>
                 <p>Already have an account <Link className='text-info' to='/login'>Please login</Link></p>
                 <div className="divider">OR</div>
