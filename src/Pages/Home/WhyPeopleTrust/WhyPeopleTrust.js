@@ -1,11 +1,11 @@
 import React from 'react';
-import money from '../../../assets/money.jpg'
+import money2 from '../../../assets/money2.jpg'
 
 const WhyPeopleTrust = () => {
     return (
-        <div className='hero'>
+        <div className='hero mt-10'>
         <div className='hero-content flex-col lg:flex-row-reverse'>
-        <img src={money} className='rounded-lg lg:w-1/2 shadow-2xl'  alt="" />
+        <img src={money2} className='rounded-lg lg:w-1/2 shadow-2xl'  alt="" />
         <div className='mx-10'>
             <h1 className='text-5xl font-bold tracking-normal leading-tight mb-4'>
             Why People Trust Us
