@@ -17,7 +17,7 @@ const Login = () => {
                 <form onSubmit={handleSubmit(handleLogin)}>
                    <div className='form-control w-full max-w-xs'>
                     <label className='label'><span className='label-text'>Email</span></label>
-                   <input type='text'
+                   <input type='email'
                     {...register("email",{
                         required:"email address is required"
                     })}
@@ -34,12 +34,12 @@ const Login = () => {
                    {errors.password && <p className='text-error'>{errors.password?.message}</p>}
                    </div> 
                    
-                    <input className='btn btn-accent w-full' value='Login' type="submit" />
+                    <input className='btn btn-info w-full mt-5' value='Login' type="submit" />
                     {/* <div>
                         {loginError && <p className='text-error'>{loginError}</p>}
                     </div> */}
                 </form>
-                <p>New to Swap <Link className='text-secondary' to ='/signup'>Create an Account</Link></p>
+                <p>New to Swap <Link className='text-info' to ='/signup'>Create an Account</Link></p>
                 <div className="divider">OR</div>
                 <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
