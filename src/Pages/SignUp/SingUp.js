@@ -5,22 +5,27 @@ import { Link } from 'react-router-dom';
 import { Authcontext } from '../../contexts/AuthProvider';
 
 const SingUp = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
-    const {createUser, updateUser, googleSignin} = useContext(Authcontext)
+    const { register, formState: { errors },reset, handleSubmit } = useForm();
+    const {createUser, updateUser} = useContext(Authcontext)
     const [signUpError, setSignUpError] =useState('')
 
     const handleSignUp = data => {
+        console.log(data)
         setSignUpError('')
         createUser(data.email, data.password)
         .then(result =>{
             const user = result.user
             console.log(user)
+            reset();
             toast.success('User create successfully')
             const userInfo = {
                 displayName: data.name
             }
+            console.log(userInfo)
             updateUser(userInfo)
-            .then(()=>{})
+            .then(()=>{
+                saveUser(data.name, data.email, data.role )
+            })
             .catch(error=>console.log(error))
         })
         .catch(error =>{
@@ -29,6 +34,22 @@ const SingUp = () => {
         });
     };
 
+    const saveUser =(name, email, role) =>{
+        const user ={name, email, role};
+        console.log(user)
+        fetch('http://localhost:5000/users',{
+            method: 'POST',
+            headers:{
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log('save user',data);
+            
+        })
+    }
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -66,18 +87,18 @@ const SingUp = () => {
                     <div className='form-control w-full'>
                         <label className='label'><span className='label-text'>Role</span></label>
                         <select {...register('role')}className="select input-bordered w-full max-w-xs">
-                            <option defaultValue='normal user'>User</option>
-                            <option value="seller">Seller</option>
+                            <option value ='buyer' selected>User</option>
+                            <option value ="seller">Seller</option>
                             
                         </select>
                     </div>
 
-                    <input className='btn btn-info w-full mt-5' value='Login' type="submit" />
+                    <input className='btn btn-info w-full mt-5' value='Sign Up' type="submit" />
                     <div>
                         {signUpError && <p className='text-error'>{signUpError}</p>}
                     </div>
                 </form>
-                <p>Already have an account <Link className='text-info' to='/login'>Please login</Link></p>
+                <p className='mt-3'>Already have an account <Link className='text-info' to='/login'>Please login</Link></p>
                 {/* <div className="divider">OR</div>
                 <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button> */}
             </div>

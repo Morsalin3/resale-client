@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Authcontext } from '../../../contexts/AuthProvider';
+import logo from '../../../assets/logo.png'
 
 const Navbar = () => {
     const {user, logout} = useContext(Authcontext);
@@ -25,7 +26,7 @@ const Navbar = () => {
         }
     </React.Fragment>
     return (
-        <div className="navbar bg-base-100 flex justify-between">
+        <div className="navbar bg-base-100 mt-3 flex justify-between">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -35,7 +36,7 @@ const Navbar = () => {
                        {menuItems}
                     </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost normal-case text-xl">Swap</Link>
+                <Link to='/' className="btn btn-ghost normal-case text-xl"><img src={logo} alt='' /></Link>
             </div>
 
             <div className="navbar-end mx-10 hidden lg:flex">

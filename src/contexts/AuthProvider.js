@@ -31,7 +31,7 @@ const AuthProvider = ({children}) => {
     }
 
     const updateUser = (userInfo)=>{
-        return updateProfile(auth, userInfo)
+        return updateProfile(auth.currentUser, userInfo)
     }
 
     useEffect(()=>{

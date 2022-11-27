@@ -6,6 +6,13 @@ import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SingUp from "../../Pages/SignUp/SingUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import NotFoundPage from '../../Pages/NotFoundPage';
+import AllSeller from "../../Pages/Dashboard/AllSeller/AllSeller";
+import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
+import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
+import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
+import Blog from "../../Pages/Blog/Blog";
 
 const router = createBrowserRouter([
     {
@@ -15,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>
+            },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
             },
             {
                 path: '/login',
@@ -31,10 +42,30 @@ const router = createBrowserRouter([
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
-                path: '/dashboard',
-                element: <Dashboard></Dashboard>
-            }
+                path: '/dashboard/allsellers',
+                element: <AllSeller></AllSeller>
+            },
+            {
+                path: '/dashboard/allbuyers',
+                element: <AllBuyers></AllBuyers>
+            },
+            {
+                path: '/dashboard/myorders',
+                element: <MyOrders></MyOrders>
+            },
+            {
+                path: '/dashboard/addaproduct',
+                element: <AddProduct></AddProduct>
+            },
+            {
+                path: '/dashboard/myproducts',
+                element: <MyProducts></MyProducts>
+            },
         ]
+    },
+    {
+        path: '*',
+        element: <NotFoundPage></NotFoundPage>
     }
 ])
 

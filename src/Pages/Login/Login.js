@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Authcontext } from '../../contexts/AuthProvider';
 
@@ -18,8 +19,9 @@ const Login = () => {
         signIn(data.email, data.password)
         .then(result=>{
             const user = result.user;
+            toast.success('Login Successfully')
             navigate(from, {replace:true});
-            // console.log(user)
+            console.log(user)
         })
         .catch(error=>{
             console.log(error.message);
@@ -32,11 +34,32 @@ const Login = () => {
         .then(result=>{
             const user = result.user;
             console.log(user);
+            saveUser(user?.displayName, user?.email)
             navigate(from, {replace: true});
+            toast.success('Login Successfully');
         })
         .catch(error=>console.log(error))
-    }
+    };
 
+    const saveUser =(name, email,) =>{
+        const user ={name, email, role:"buyer"};
+        console.log(user)
+
+        fetch('http://localhost:5000/users',{
+            method: 'POST',
+            headers:{
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log('save user',data);
+            
+        })
+    }
+       
+   
 
 
     return (
@@ -68,7 +91,7 @@ const Login = () => {
                         {loginError && <p className='text-error'>{loginError}</p>}
                     </div>
                 </form>
-                <p>New to Swap <Link className='text-info' to ='/signup'>Create an Account</Link></p>
+                <p className='mt-3'>New to Swap <Link className='text-info' to ='/signup'>Create an Account</Link></p>
                 <div className="divider">OR</div>
                 <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
