@@ -6,7 +6,7 @@ import { Authcontext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const {register, formState:{errors}, handleSubmit} = useForm();
-    const {signIn} = useContext(Authcontext);
+    const {signIn, googleSignin} = useContext(Authcontext);
     const [loginError, setLoginError] = useState('')
     const location = useLocation();
     const navigate = useNavigate();
@@ -25,12 +25,24 @@ const Login = () => {
             console.log(error.message);
             setLoginError(error.message)
         })
+    };
+
+    const handleGoogleSignIn =()=>{
+        googleSignin()
+        .then(result=>{
+            const user = result.user;
+            console.log(user);
+            navigate(from, {replace: true});
+        })
+        .catch(error=>console.log(error))
     }
+
+
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
             <div className='w-96 p-7'>
-                <h2 className='text-xl text-center'>Login</h2>
+                <h2 className='text-3xl font-bold text-center'>Login</h2>
                 <form onSubmit={handleSubmit(handleLogin)}>
                    <div className='form-control w-full max-w-xs'>
                     <label className='label'><span className='label-text'>Email</span></label>
@@ -58,7 +70,7 @@ const Login = () => {
                 </form>
                 <p>New to Swap <Link className='text-info' to ='/signup'>Create an Account</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );

@@ -6,7 +6,7 @@ import { Authcontext } from '../../contexts/AuthProvider';
 
 const SingUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const {createUser, updateUser} = useContext(Authcontext)
+    const {createUser, updateUser, googleSignin} = useContext(Authcontext)
     const [signUpError, setSignUpError] =useState('')
 
     const handleSignUp = data => {
@@ -27,14 +27,13 @@ const SingUp = () => {
             console.log(error)
             setSignUpError(error.message)
         });
-        
-        
-    }
+    };
+
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
             <div className='w-96 p-7'>
-                <h2 className='text-xl text-center'>Sing Up</h2>
+                <h2 className='text-3xl font-bold text-center'>Sing Up</h2>
                 <form onSubmit={handleSubmit(handleSignUp)}>
                     <div className='form-control w-full max-w-xs'>
                         <label className='label'><span className='label-text'>Name</span></label>
@@ -79,8 +78,8 @@ const SingUp = () => {
                     </div>
                 </form>
                 <p>Already have an account <Link className='text-info' to='/login'>Please login</Link></p>
-                <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                {/* <div className="divider">OR</div>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button> */}
             </div>
         </div>
     );
