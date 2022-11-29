@@ -40,6 +40,7 @@ const Login = () => {
         googleSignin()
         .then(result=>{
             const user = result.user;
+            setLoginUserEmail(user?.email)
             console.log(user);
             saveUser(user?.displayName, user?.email)
             navigate(from, {replace: true});

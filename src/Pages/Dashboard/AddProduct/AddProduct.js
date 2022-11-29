@@ -12,8 +12,9 @@ const AddProduct = () => {
 
     const handleProduct = data => {
         const product = {
+            category_id: data.category,
             seller_name: user?.displayName,
-            email: user?.email,
+            seller_email: user?.email,
             product_name: data.product,
             phone: data.phone,
             location: data.location,
@@ -24,22 +25,26 @@ const AddProduct = () => {
             use_years: data.use_years,
             purchase_years: data.purachse_years,
             date: new Date(),
+            status: "available"
         }
             console.log(product)
         //save product information to the database
-        fetch('http://localhost:5000/doctors',{
+        fetch('http://localhost:5000/products',{
             method: 'POST',
             headers:{
                 'content-type':'application/json',
-                // authorization: `bearer ${localStorage.getItem('accessToken')}`
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(product)
         })
         .then(res=>res.json())
         .then(result =>{
             console.log(result);
-            toast.success (`${data.product} is added successfully`)
-            navigate('/dashboard/myproducts')
+            if(result.acknowledged){
+                toast.success (`${data.product_name} is added successfully`)
+                // navigate('/dashboard/myproducts')
+            }
+           
         });     
 
     }
@@ -74,7 +79,9 @@ const AddProduct = () => {
                 <div className='form-control w-full'>
                     <label className='label'><span className='label-text'>Category</span></label>
                     <select
-                        {...register('category_id')}
+                        {...register('category',{
+                            required: true
+                        })}
                         className="select input-bordered w-full max-w-xs">
 
                         <option value="1" selected>Apple</option>

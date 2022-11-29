@@ -13,6 +13,19 @@ const {data: buyers = [] } = useQuery({
     } 
 });
 
+const handleDeleteBuyer = id =>{
+    fetch(`http://localhost:5000/users/${id}`,{
+        method: 'DELETE',  
+        headers: {
+            authorization: `bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+    .then(res => res.json())
+    .then(data =>{
+        console.log(data)
+    })
+}
+
     return (
         <div>
             <h3 className='text-3xl font-bold'>All Buyers</h3>
@@ -34,7 +47,7 @@ const {data: buyers = [] } = useQuery({
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>
                                 <td>{buyer.role}</td>
-                                <td><button className='btn btn-xs btn-danger'>Delete</button></td>
+                                <td><button onClick={()=> handleDeleteBuyer(buyer._id)} className='btn btn-xs btn-danger'>Delete</button></td>
                             </tr>)
                         }
 
