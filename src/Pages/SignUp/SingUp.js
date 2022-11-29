@@ -114,6 +114,7 @@ const SingUp = () => {
                 <p className='mt-3'>Already have an account <Link className='text-info' to='/login'>Please login</Link></p>
                 {/* <div className="divider">OR</div>
                 <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button> */}
+                
             </div>
         </div>
     );
