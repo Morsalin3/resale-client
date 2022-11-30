@@ -5,7 +5,7 @@ const BrandOptions = ({category}) => {
     const {_id, brand,img} =category;
 
     return (
-        <Link to ={`/categories/${_id}`}
+        <Link to ={`/productcategories`}
         className="card w-96 bg-base-100 shadow-xl ">
             <figure><img src={img} alt="Phones" /></figure>
             <div className="card-body">

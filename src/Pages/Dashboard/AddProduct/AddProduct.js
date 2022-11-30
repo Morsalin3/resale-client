@@ -14,7 +14,7 @@ const AddProduct = () => {
         const product = {
             category_id: data.category,
             seller_name: user?.displayName,
-            seller_email: user?.email,
+            email: user?.email,
             product_name: data.product,
             phone: data.phone,
             location: data.location,
@@ -42,7 +42,7 @@ const AddProduct = () => {
             console.log(result);
             if(result.acknowledged){
                 toast.success (`${data.product_name} is added successfully`)
-                // navigate('/dashboard/myproducts')
+                navigate('/dashboard/myproducts')
             }
            
         });     
@@ -53,7 +53,7 @@ const AddProduct = () => {
 
 
         <div className='w-96 p-7'>
-            <h3 className='text-3xl font-bold'>Add Product</h3>
+            <h3 className='text-3xl font-bold mb-5'>Add Product</h3>
             <form onSubmit={handleSubmit(handleProduct)}>
                 <div className='form-control w-full max-w-xs'>
                     <label className='label'><span className='label-text'>Product Name</span></label>

@@ -13,6 +13,8 @@ import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import Blog from "../../Pages/Blog/Blog";
+import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
+import ProductCategories from "../../Pages/ProductCategories/ProductCategories";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +36,10 @@ const router = createBrowserRouter([
             {
                 path: '/Signup',
                 element: <SingUp></SingUp>
+            },
+            {
+                path: '/productcategories',
+                element: <PrivateRoute><ProductCategories></ProductCategories></PrivateRoute>
             }
         ]
     },
@@ -48,6 +54,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/allbuyers',
                 element: <AllBuyers></AllBuyers>
+            },
+            {
+                path: '/dashboard/repoteditems',
+                element: <ReportedItems></ReportedItems>
             },
             {
                 path: '/dashboard/myorders',
