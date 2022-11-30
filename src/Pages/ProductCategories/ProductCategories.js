@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookingModal from '../BookingModal/BookingModal';
 import ProductsDetails from '../ProductsDetails/ProductsDetails';
 import './ProductCategories.css'
 
 const ProductCategories = () => {
     const products = useLoaderData();
-    console.log(products)
+    const [cardInfo, setCardInfo] = useState(null)
+    // console.log(products)
     return (
         <section>
             <h2 className='text-3xl font-bold mx-5 my-5'>Our Products{products.length}</h2>
@@ -14,11 +16,18 @@ const ProductCategories = () => {
                     products.map(product => <ProductsDetails
                     key={product._id}
                     product={product}
+                    setCardInfo={setCardInfo}
                     ></ProductsDetails>)
                 }
                 
              
             </div>
+            {
+             cardInfo &&   
+            <BookingModal
+            cardInfo={cardInfo}
+            ></BookingModal>
+            }    
         </section>
     );
 };

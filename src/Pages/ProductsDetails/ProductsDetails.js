@@ -1,12 +1,13 @@
 import React from 'react';
 
-const ProductsDetails = ({ product }) => {
+const ProductsDetails = ({ product, setCardInfo }) => {
     const { date, img, location, phone,
         original_price, product_condition,
         resale_price, seller_name, product_name,
         status, use_years, description
 
     } = product;
+    
     return (
         <div className="card card-compact w-96 bg-base-100 shadow-xl">
             <figure><img src={img} alt="Phones" className='w-1/2' /></figure>
@@ -30,7 +31,11 @@ const ProductsDetails = ({ product }) => {
                 </div>
 
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Book Now</button>
+                    <label 
+                    htmlFor="booking-modal" 
+                    className="btn btn-info"
+                    onClick={()=> setCardInfo(product)}
+                    >Book Now</label>
                 </div>
             </div>
         </div>
