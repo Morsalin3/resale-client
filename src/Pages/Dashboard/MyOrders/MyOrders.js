@@ -6,7 +6,7 @@ import { Authcontext } from '../../../contexts/AuthProvider';
 const MyOrders = () => {
     const {user} = useContext(Authcontext);
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    const url = `https://resale-server-one.vercel.app/bookings?email=${user?.email}`;
 
     const {data: bookings = [] , isLoading} = useQuery({
         queryKey: ["bookings"],
@@ -41,7 +41,7 @@ const MyOrders = () => {
                         </tr>
                     </thead>
                     <tbody>
-                       {
+                       { bookings &&
                         bookings?.map((booking, i)=> <tr key={booking._id}>
                         <th>{i+1}</th>
                         <td>

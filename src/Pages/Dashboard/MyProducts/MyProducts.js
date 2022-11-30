@@ -6,7 +6,7 @@ import { Authcontext } from '../../../contexts/AuthProvider';
 const MyProducts = () => {
     const {user} = useContext(Authcontext);
 
-    const url =`http://localhost:5000/products?email=${user?.email}`;
+    const url =`https://resale-server-one.vercel.app/products?email=${user?.email}`;
 
     const {data: products = [], refetch, isLoading} = useQuery({
         queryKey:['products'],
@@ -22,7 +22,7 @@ const MyProducts = () => {
     });
 
     const deleteProduct= (id, name) =>{
-        fetch(`http://localhost:5000/products/${id}`,{
+        fetch(`https://resale-server-one.vercel.app/products/${id}`,{
             method: "DELETE",
             headers:{
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -60,7 +60,7 @@ const MyProducts = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
+                        {  products &&
                             products?.map((product, i) => <tr key={product._id}>
                                 <th>{i + 1}</th>
                                 <td>

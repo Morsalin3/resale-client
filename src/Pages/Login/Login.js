@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -17,9 +17,13 @@ const Login = () => {
 
     const from = location.state?.from?.pathname || '/';
 
-    if(token){
-        navigate(from, {replace:true});
-    }
+    useEffect(()=>{
+        
+        if(token){
+            navigate(from, {replace:true});
+        }
+    },[from, navigate, token])
+
 
     const handleLogin = data =>{
         console.log(data);
@@ -40,10 +44,9 @@ const Login = () => {
         googleSignin()
         .then(result=>{
             const user = result.user;
-            setLoginUserEmail(user?.email)
+            setLoginUserEmail(user.email)
             console.log(user);
             saveUser(user?.displayName, user?.email)
-            navigate(from, {replace: true});
             toast.success('Login Successfully');
         })
         .catch(error=>console.log(error))
@@ -51,9 +54,9 @@ const Login = () => {
 
     const saveUser =(name, email,) =>{
         const user ={name, email, role:"buyer"};
-        console.log(user)
+        // console.log(user)
 
-        fetch('http://localhost:5000/users',{
+        fetch('https://resale-server-one.vercel.app/users',{
             method: 'POST',
             headers:{
                 'content-type': 'application/json',

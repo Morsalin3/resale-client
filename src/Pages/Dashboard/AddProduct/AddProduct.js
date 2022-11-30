@@ -29,9 +29,9 @@ const AddProduct = () => {
             description: data.description,
             advertise: false
         }
-            console.log(product)
+            // console.log(product)
         //save product information to the database
-        fetch('http://localhost:5000/products',{
+        fetch('https://resale-server-one.vercel.app/products',{
             method: 'POST',
             headers:{
                 'content-type':'application/json',

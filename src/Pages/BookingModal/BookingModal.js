@@ -26,7 +26,7 @@ const BookingModal = ({cardInfo, setCardInfo}) => {
             date,name,email,product,price,phone,location,img
         }
 
-        fetch ('http://localhost:5000/bookings',{
+        fetch ('https://resale-server-one.vercel.app/bookings',{
             method: 'POST',
             headers: {
                 'content-type':'application/json'

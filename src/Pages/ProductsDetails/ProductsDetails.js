@@ -6,7 +6,7 @@ const ProductsDetails = ({ product, setCardInfo }) => {
     const { date, img, location, phone,
         original_price, product_condition,
         resale_price, seller_name, product_name,
-        status, use_years, description, isVerified
+        status, use_years, description
 
     } = product;
 
