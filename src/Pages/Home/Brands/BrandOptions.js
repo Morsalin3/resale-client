@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const BrandOptions = ({category}) => {
-    const {_id, brand,img} =category;
+    const {_id, brand, img, id} =category;
 
     return (
-        <Link to ={`/productcategories`}
+        <Link to ={`/productcategories/${id}`}
         className="card w-96 bg-base-100 shadow-xl ">
             <figure><img src={img} alt="Phones" /></figure>
             <div className="card-body">

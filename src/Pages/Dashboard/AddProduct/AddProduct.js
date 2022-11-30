@@ -25,7 +25,8 @@ const AddProduct = () => {
             use_years: data.use_years,
             purchase_years: data.purachse_years,
             date: new Date(),
-            status: "available"
+            status: "available",
+            description: data.description
         }
             console.log(product)
         //save product information to the database
@@ -41,7 +42,7 @@ const AddProduct = () => {
         .then(result =>{
             console.log(result);
             if(result.acknowledged){
-                toast.success (`${data.product_name} is added successfully`)
+                toast.success (`is added successfully`)
                 navigate('/dashboard/myproducts')
             }
            

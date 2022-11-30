@@ -38,8 +38,9 @@ const router = createBrowserRouter([
                 element: <SingUp></SingUp>
             },
             {
-                path: '/productcategories',
-                element: <PrivateRoute><ProductCategories></ProductCategories></PrivateRoute>
+                path: '/productcategories/:id',
+                element: <PrivateRoute><ProductCategories></ProductCategories></PrivateRoute>,
+                loader: ({params})=> fetch(`http://localhost:5000/category/${params.id}`)
             }
         ]
     },

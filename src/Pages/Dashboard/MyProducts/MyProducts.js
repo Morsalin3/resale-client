@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Authcontext } from '../../../contexts/AuthProvider';
 
 const MyProducts = () => {
@@ -7,7 +8,7 @@ const MyProducts = () => {
 
     const url =`http://localhost:5000/products?email=${user?.email}`;
 
-    const {data: products = [], refetch} = useQuery({
+    const {data: products = [], refetch, isLoading} = useQuery({
         queryKey:['products'],
         queryFn: async() =>{
             const res = await fetch(url,{
@@ -18,10 +19,33 @@ const MyProducts = () => {
             const data =await res.json();
             return data;
         }
-    })
+    });
+
+    const deleteProduct= (id, name) =>{
+        fetch(`http://localhost:5000/products/${id}`,{
+            method: "DELETE",
+            headers:{
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            if(data.acknowledged){
+                toast.success(`${name} is delete successfully`)
+            }
+            refetch();
+
+        })
+    }
+
+    if(isLoading){
+       return <progress className="progress w-56"></progress>
+    }
+
     return (
         <div>
-            <h3 className='text-3xl font-bold mb-5'>My Products:{products.length}</h3>
+            <h3 className='text-3xl font-bold mb-5'>My Products</h3>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -30,6 +54,7 @@ const MyProducts = () => {
                             <th>Avatar</th>
                             <th>Product Name</th>
                             <th>Price</th>
+                            <th>Add</th>
                             <th>status</th>
                             <th>Action</th>
                         </tr>
@@ -47,12 +72,12 @@ const MyProducts = () => {
                                 </td>
                                 <td>{product.product_name}</td>
                                 <td>{product.resale_price}</td>
+                                <td>Advertise</td>
                                 <td>
                                 <button className='btn btn-info'>{product.status}</button>
                                 </td>
                                 <td>
-                                    {/* <label onClick={()=> setDeletingDoctor(doctor)} htmlFor="confirmation-modal" className="btn btn-xs btn-error">Delete</label> */}
-                                    <button className="btn btn-accent ">Delete</button>
+                                    <button onClick={()=> deleteProduct(product._id, product.product_name)} className="btn btn-accent ">Delete</button>
                                 </td>
                             </tr>)
                         }

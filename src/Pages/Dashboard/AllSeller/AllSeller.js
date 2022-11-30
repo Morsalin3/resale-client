@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { Authcontext } from '../../../contexts/AuthProvider';
 
 const AllSeller = () => {
+  const {user} = useContext(Authcontext)
   const {data: sellers = [], refetch } = useQuery({  
     queryKey: ['buyers'],
     queryFn: async () => {
@@ -30,6 +32,23 @@ const handleDeleteSeller = (id, name) =>{
   })
 };
 
+const handleVerify = email =>{
+   fetch (`http://localhost:5000/users/admin/${email}`,{
+      method: 'PUT',
+       headers: {
+        authorization: `bearer ${localStorage.getItem('accessToken')}`
+       }
+   })
+   .then(res=>res.json())
+   .then(data=>{
+    if(data.modifiedCount > 0){
+      toast.success('verify seller successful.')
+      refetch();
+    }
+    console.log(data)
+   })
+}
+
     return (
         <div>
             <h3 className='text-3xl font-bold mb-5'>All Sellers</h3>
@@ -41,6 +60,7 @@ const handleDeleteSeller = (id, name) =>{
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
+              <th>Verify</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -51,7 +71,8 @@ const handleDeleteSeller = (id, name) =>{
                 <td>{seller.name}</td>
                 <td>{seller.email}</td>
                 <td>{seller.role}</td>
-                {/* <td>{seller?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
+                <td><button onClick={() => handleVerify(seller.email)} className='btn btn-xs btn-primary'>{user?.seller_status ==='verified' ? 'verified' :'verify seller'} </button></td>
+
                 <td><button onClick={()=>handleDeleteSeller(seller._id, seller.name)} className='btn btn-xs btn-warning'>Delete</button></td>
               </tr>)
             }
