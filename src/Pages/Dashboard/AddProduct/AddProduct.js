@@ -26,7 +26,8 @@ const AddProduct = () => {
             purchase_years: data.purachse_years,
             date: new Date(),
             status: "available",
-            description: data.description
+            description: data.description,
+            advertise: false
         }
             console.log(product)
         //save product information to the database

@@ -26,6 +26,7 @@ const ProductCategories = () => {
              cardInfo &&   
             <BookingModal
             cardInfo={cardInfo}
+            setCardInfo={setCardInfo}
             ></BookingModal>
             }    
         </section>

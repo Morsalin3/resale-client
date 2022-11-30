@@ -41,12 +41,12 @@ const handleVerify = email =>{
    })
    .then(res=>res.json())
    .then(data=>{
-    if(data.modifiedCount > 0){
+    console.log(data)
       toast.success('verify seller successful.')
       refetch();
-    }
-    console.log(data)
-   })
+
+
+   });
 }
 
     return (
@@ -71,7 +71,7 @@ const handleVerify = email =>{
                 <td>{seller.name}</td>
                 <td>{seller.email}</td>
                 <td>{seller.role}</td>
-                <td><button onClick={() => handleVerify(seller.email)} className='btn btn-xs btn-primary'>{user?.seller_status ==='verified' ? 'verified' :'verify seller'} </button></td>
+                <td><button onClick={() => handleVerify(seller.email)} className='btn btn-xs btn-primary'>{seller?.isVerified ==='verified' ? 'verified' :'verify seller'} </button></td>
 
                 <td><button onClick={()=>handleDeleteSeller(seller._id, seller.name)} className='btn btn-xs btn-warning'>Delete</button></td>
               </tr>)

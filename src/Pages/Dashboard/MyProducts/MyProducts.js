@@ -61,7 +61,7 @@ const MyProducts = () => {
                     </thead>
                     <tbody>
                         {
-                            products.map((product, i) => <tr key={product._id}>
+                            products?.map((product, i) => <tr key={product._id}>
                                 <th>{i + 1}</th>
                                 <td>
                                     <div className="avatar">
@@ -72,7 +72,7 @@ const MyProducts = () => {
                                 </td>
                                 <td>{product.product_name}</td>
                                 <td>{product.resale_price}</td>
-                                <td>Advertise</td>
+                                <td><button className='btn btn-info'>Advertise</button></td>
                                 <td>
                                 <button className='btn btn-info'>{product.status}</button>
                                 </td>
