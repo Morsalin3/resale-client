@@ -10,6 +10,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 .And use Mongodb database
 .Hosting on Firebase
 
+.adminEmail: <morsalin7@gmail.com>
+.adminPassword: <1234567>
+
 ## Available Scripts
 
 In the project directory, you can run:
