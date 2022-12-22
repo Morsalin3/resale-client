@@ -51,7 +51,7 @@ const handleVerify = email =>{
 
     return (
         <div>
-            <h3 className='text-3xl font-bold mb-5'>All Sellers</h3>
+            <h3 className='text-3xl font-bold m-10'>All Sellers</h3>
             <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>

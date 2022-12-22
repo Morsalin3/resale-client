@@ -13,7 +13,7 @@ const [categories, setCategoreis] = useState([])
 
     return (
         <section className='mt-10'>
-                <h2 className='text-4xl font-bold'>Smartphone Brands For You</h2>
+                <h2 className='text-5xl font-bold my-10'>Smartphone Brands For You</h2>
             <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6'>
 
                 {

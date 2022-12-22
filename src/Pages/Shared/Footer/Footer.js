@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <div>
-            <footer className="p-10">
+        <div className=' bg-blue-200 rounded mt-5'>
+            <footer className="p-10 ">
             <div className='footer'>
                 <div>
                     <span className="footer-title">Services</span>
@@ -30,7 +30,7 @@ const Footer = () => {
             <div className='text-center mt-20'>
                 <p>Copyright © 2022 - All right reserved by SWAP</p>
             </div>
-        </footer>
+           </footer>
         </div>
     );
 };

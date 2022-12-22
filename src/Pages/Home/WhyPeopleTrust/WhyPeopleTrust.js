@@ -6,7 +6,7 @@ const WhyPeopleTrust = () => {
         <div className='hero mt-10'>
         <div className='hero-content flex-col lg:flex-row-reverse'>
         <img src={money2} className='rounded-lg lg:w-1/2 shadow-2xl'  alt="" />
-        <div className='mx-10'>
+        <div className='mr-10'>
             <h1 className='text-5xl font-bold tracking-normal leading-tight mb-4'>
             Why People Trust Us
             </h1>
